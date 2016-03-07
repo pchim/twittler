@@ -13,10 +13,25 @@ header {
 	width: 35%;
 }
 
+
 .tweet {
-	font: 20px Georgia;
 	border: 1px solid black;
 	width: 400px;
 	margin: 5px auto;
 	padding: 5px auto;
+}
+
+.tweet.dateTime {
+	font: 10px;
+	color: gray;
+	display: inline-block;
+}
+
+.username {
+	display: inline-block;
+
+}
+
+.message {
+	font: 20px Georgia;
 }
