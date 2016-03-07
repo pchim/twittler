@@ -2,6 +2,7 @@
 <html>
   <head>
     <script src="jquery.js"></script>
+    <script src="prettyDate.js"></script>
     <script src="data_generator.js"></script>
   </head>
   <body>
@@ -24,8 +25,8 @@
 	          $username.text('@' + tweet.user);
 	          $username.addClass(tweet.user);
 
-	          // set up individual tweet properties
-	          $tweet.text(': ' + tweet.message  + ' || time: ' + tweet.created_at);
+	          // set up individual tweet properties, use prettyDate to format to relative time
+	          $tweet.text(': ' + tweet.message  + ' || time: ' + (tweet.created_at.toLocaleString())); 
 	          $tweet.prepend($username);
 	          $tweet.addClass(tweet.user);
 	          $tweet.addClass('tweet');
@@ -45,8 +46,6 @@
     		}
 
     		printTweet();
-
-
 
       });
 
