@@ -1,37 +1,46 @@
-header {
+header h1{
 	text-align: center;
 }
 
 .page {
 	float: left;
-	width: 30%;
-
+	width: 20%;
+	margin: 5px 2%;
+	border: 1px solid black;
 }
 
 #feed {
 	margin: 5px auto;
-	width: 35%;
+	width: 50%;
 }
 
 
 .tweet {
 	border: 1px solid black;
-	width: 400px;
-	margin: 5px auto;
-	padding: 5px auto;
+	display: block;
+	font: 10px;
+	margin: 10px 10px;
+	padding: 5px 5px 20px 5px;
 }
 
-.tweet.dateTime {
-	font: 10px;
-	color: gray;
+.tweetElement {
 	display: inline-block;
+	text-align: left;
+	margin: 10px 5px;	
+}
+
+.dateTime {
+	color: gray;
+
 }
 
 .username {
-	display: inline-block;
-
+	
 }
 
 .message {
 	font: 20px Georgia;
+	margin: 10px 10px;
+	text-align: center;
+	display: block;
 }
