@@ -1,4 +1,4 @@
-header h1{
+header h1 {
 	text-align: center;
 }
 
@@ -7,6 +7,30 @@ header h1{
 	width: 20%;
 	margin: 5px 2%;
 	border: 1px solid black;
+	overflow: auto;
+}
+
+.page h2 {
+	text-align: center;
+}
+
+button {
+	margin: 5px auto;
+	background-color: blue; 
+  color: white;
+  text-align: center;
+  font-size: 16px;
+  display: block;
+}
+
+.pause{
+	background-color: red;
+  color: black;
+}
+
+.pause.green-button {
+	background-color: green;
+	color: white;
 }
 
 #feed {
@@ -38,7 +62,7 @@ header h1{
 	
 }
 
-.message {
+.tweet .message {
 	font: 20px Georgia;
 	margin: 10px 10px;
 	text-align: center;

@@ -11,7 +11,7 @@
   	<header>
 
   	<aside class='page'>
-  		<section>UserInfo</section>
+  		<section id='currPage'><h2>Home Page</h2></section>
   	</aside>
 
   	<section id='feed' class='page'>
@@ -19,7 +19,9 @@
   	</section>
 
   	<aside class='page'>
-  		<section>Visitor</section>
+  		<section><h2>Visitor</h2></section>
+  		<button id='goHome'>Home</button>
+  		<button class='pause'>Start/Stop Feed</button>
   	</aside>
 
     <script>
@@ -27,6 +29,7 @@
       $(document).ready(function(){
         var $feed = $('#feed');
         $feed.html('');
+        var timer;
 
         // format date to look nice
         var formatDate = function(date){
@@ -41,7 +44,7 @@
 
         // function to print out and create properties for new tweets
         var printTweet = function(){
-        	$feed.html('<div id=\'poop\'></div>');    	
+        	$feed.html('');    	
 	        var index = streams.home.length - 1;
 	        while(index >= 0){
 	          var tweet = streams.home[index];
@@ -68,21 +71,55 @@
 	          $tweet.append($message);
 	          $tweet.addClass(tweet.user);
 	          $tweet.addClass('tweet');
-	          $tweet.children().addClass('tweetElement')
+	          $tweet.children().addClass('tweetElement');
 
 	          // set up on click listener for username
 	          var setOnclick = function(userClass){
 		          $username.on('click', function(){
 		          	$('.tweet').hide();
+		          	$('.pause').hide();
 		          	$('.'+userClass).show();
+		          	$('#currPage h2').text('@'+userClass);
+		          	if (timer){
+		          		clearTimeout(timer);
+		          		timer = null;
+		          	}
 		          });
 	          }(tweet.user);
 
 	          $tweet.appendTo($feed);
 	          index -= 1;
+	          
 	        }
-        setTimeout(printTweet, 3000);
+
+	      // animate feed refresh
+	      $('.tweet:first-child').hide();  
+	      $('.tweet:first-child').slideDown(300);
+        timer = setTimeout(printTweet, 1510);
     		}
+
+    		// on click for home button
+    		$('#goHome').on('click', function(){
+    			if(!timer){
+    				printTweet();
+    				$('#currPage h2').text('Home Page');
+    				$('.pause').show();
+    				$('.pause').removeClass('green-button');
+    			}
+    		});
+
+    		// on click for pause/resume feed
+    		$('.pause').on('click', function(){
+		        if (timer){
+		          clearTimeout(timer);
+		          timer = null;
+		          $('.pause').addClass('green-button');
+		        } else {
+    					printTweet();
+    					$('#currPage h2').text('Home Page');
+    					$('.pause').removeClass('green-button');
+		        }   				
+    		});
 
     		printTweet();
 
