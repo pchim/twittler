@@ -11,36 +11,42 @@
         var $body = $('body');
         $body.html('');
 
-/*
-        var index = 0;
+        // function to print out and create properties for new tweets
         var printTweet = function(){
-	        var numStreams = streams.home.length;
-	        while(index < numStreams){
-	          var tweet = streams.home[index];
-	          var $tweet = $('<div></div>');
-	          $tweet.text('@' + tweet.user + ': ' + tweet.message  + ' || time: ' + tweet.created_at);
-	          $tweet.appendTo($body);
-	          index += 1;
-	        }
-        setTimeout(printTweet, 1500);
-    		}
-*/
-
-        var printTweet = function(){
-        	$body.html('');    	
+        	$body.html('<div id=\'poop\'></div>');    	
 	        var index = streams.home.length - 1;
 	        while(index >= 0){
 	          var tweet = streams.home[index];
 	          var $tweet = $('<div></div>');
-	          $tweet.text('@' + tweet.user + ': ' + tweet.message  + ' || time: ' + tweet.created_at);
+
+	          // set up clickable username
+	          var $username = $('<a href=\'#\'></a>');
+	          $username.text('@' + tweet.user);
+	          $username.addClass(tweet.user);
+
+	          // set up individual tweet properties
+	          $tweet.text(': ' + tweet.message  + ' || time: ' + tweet.created_at);
+	          $tweet.prepend($username);
+	          $tweet.addClass(tweet.user);
+	          $tweet.addClass('tweet');
+
+	          // set up on click listener for username
+	          var setOnclick = function(userClass){
+		          $username.on('click', function(){
+		          	$('.tweet').hide();
+		          	$('.'+userClass).show();
+		          });
+	          }(tweet.user);
+
 	          $tweet.appendTo($body);
 	          index -= 1;
 	        }
         setTimeout(printTweet, 3000);
     		}
 
-
     		printTweet();
+
+
 
       });
 
