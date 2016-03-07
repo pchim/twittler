@@ -28,6 +28,18 @@
         var $feed = $('#feed');
         $feed.html('');
 
+        // format date to look nice
+        var formatDate = function(date){
+        	var day = date.toDateString();
+        	day = day.substr(0,day.length-5); // Day Mon Date
+        	var time = date.toLocaleTimeString();
+        	time = time.substr(0,time.length-6)+time.substr(time.length-2);
+        	var relTime = prettyDate(date.toLocaleString());
+
+        	return day + ', ' + time + ' (' + relTime + ')';
+
+        }
+
         // function to print out and create properties for new tweets
         var printTweet = function(){
         	$feed.html('<div id=\'poop\'></div>');    	
@@ -37,13 +49,20 @@
 	          var $tweet = $('<div></div>');
 
 	          // set up clickable username
-	          var $username = $('<a href=\'#\'></a>');
+	          var $username = $('<a href=\'#\' class=\'username\'></a>');
 	          $username.text('@' + tweet.user);
 	          $username.addClass(tweet.user);
 
+	          var $dateTime = $('<p class=\'dateTime\'></p>');
+	          $dateTime.text(formatDate(tweet.created_at));
+	          
 	          // set up individual tweet properties, use prettyDate to format to relative time
-	          $tweet.text(': ' + tweet.message  + ' || time: ' + (tweet.created_at.toLocaleString())); 
-	          $tweet.prepend($username);
+	          var $message = $('<p class=\'message\'></p>');
+	          $message.text(tweet.message);
+
+	          $tweet.append($username);
+	          $tweet.append($dateTime);
+	          $tweet.append($message);
 	          $tweet.addClass(tweet.user);
 	          $tweet.addClass('tweet');
 

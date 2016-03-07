@@ -15,7 +15,15 @@ function prettyDate(time){
 		return;
 			
 	return day_diff == 0 && (
-			diff < 60 && "just now" ||
+			diff < 2 && "just now" ||
+			diff < 3 && "2s" ||
+			diff < 4 && "3s" ||
+			diff < 5 && "4s" ||
+			diff < 10 && "5s" ||
+			diff < 15 && "10s" ||
+			diff < 30 && "15s" ||
+			diff < 45 && "30s" ||
+			diff < 60 && "45s" ||
 			diff < 120 && "1 minute ago" ||
 			diff < 3600 && Math.floor( diff / 60 ) + " minutes ago" ||
 			diff < 7200 && "1 hour ago" ||
